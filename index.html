@@ -16,7 +16,6 @@
             line-height: 1.6;
         }
 
-        /* --- EN-TÊTE COLORÉ --- */
         .hero-header {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
@@ -75,7 +74,6 @@
             color: #f8fafc;
         }
 
-        /* --- MISE EN PAGE PRINCIPALE --- */
         .main-wrapper {
             max-width: 1150px;
             margin: 35px auto;
@@ -103,7 +101,6 @@
             top: 20px;
         }
 
-        /* --- CARTES D'ÉTAPES COLORÉES --- */
         .step-card {
             background-color: #ffffff;
             border-radius: 12px;
@@ -187,7 +184,6 @@
             min-width: 220px;
         }
 
-        /* --- PANNEAU RÉCAPITULATIF (DROITE) --- */
         .summary-header {
             background-color: #1e293b;
             color: #ffffff;
@@ -400,7 +396,29 @@
             <div class="step-card">
                 <div class="step-header">
                     <div class="step-number">3</div>
-                    <h2>Vos Coordonnées & Mode de Règlement</h2>
+                    <h2>Vos Coordonnées & Facturation</h2>
+                </div>
+
+                <div class="field-group">
+                    <label for="typeClient">Vous commandez en tant que :</label>
+                    <select id="typeClient" onchange="basculerChampsEntreprise()">
+                        <option value="particulier">👤 Particulier</option>
+                        <option value="entreprise">🏢 Entreprise / Professionnel</option>
+                    </select>
+                </div>
+
+                <!-- Champ Entreprise (Masqué par défaut) -->
+                <div id="blocEntreprise" style="display: none;" class="field-group">
+                    <div class="grid-2">
+                        <div>
+                            <label for="company">Nom de la Société *</label>
+                            <input type="text" id="company" placeholder="Ex: GST Énergie SRL">
+                        </div>
+                        <div>
+                            <label for="tva">Numéro de TVA *</label>
+                            <input type="text" id="tva" placeholder="Ex: BE0123.456.789">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid-2">
@@ -409,20 +427,14 @@
                         <input type="text" id="name" placeholder="Ex: Jean Dupont">
                     </div>
                     <div class="field-group">
-                        <label for="company">Société & N° TVA (Optionnel)</label>
-                        <input type="text" id="company" placeholder="Ex: Dupont SRL - BE0123.456.789">
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="field-group">
-                        <label for="email">Adresse Email *</label>
-                        <input type="email" id="email" placeholder="contact@domaine.be">
-                    </div>
-                    <div class="field-group">
                         <label for="phone">Téléphone *</label>
                         <input type="tel" id="phone" placeholder="+32 470 00 00 00">
                     </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="email">Adresse Email de contact / facture *</label>
+                    <input type="email" id="email" placeholder="contact@domaine.be">
                 </div>
 
                 <div class="field-group">
@@ -487,6 +499,16 @@
             batterieAucune: 0,
             batterieLiFePO4: 750
         };
+
+        function basculerChampsEntreprise() {
+            var typeClient = document.getElementById('typeClient').value;
+            var blocEntreprise = document.getElementById('blocEntreprise');
+            if (typeClient === 'entreprise') {
+                blocEntreprise.style.display = 'block';
+            } else {
+                blocEntreprise.style.display = 'none';
+            }
+        }
 
         function adapterFixationSelonUsage() {
             var usage = document.getElementById('usage').value;
@@ -580,8 +602,10 @@
         }
 
         function validerCommande() {
+            var typeClient = document.getElementById('typeClient').value;
             var name = document.getElementById('name').value;
             var company = document.getElementById('company').value;
+            var tva = document.getElementById('tva').value;
             var email = document.getElementById('email').value;
             var phone = document.getElementById('phone').value;
             var totalHT = document.getElementById('total-ht').innerText;
@@ -593,23 +617,22 @@
                 return;
             }
 
+            if (typeClient === 'entreprise' && (!company || !tva)) {
+                alert("Veuillez renseigner le nom de la société et le numéro de TVA pour votre facture entreprise.");
+                return;
+            }
+
             if (modePaiement === 'alma') {
                 window.location.href = "https://pay.getalma.eu/TON_LIEN_MARCHAND_ALMA";
             } else if (modePaiement === 'paypal') {
                 window.location.href = "https://www.paypal.com/ncp/payment/TON_LIEN_PAYPAL";
             } else {
                 alert(
-                    "Merci " + name + (company ? " (" + company + ")" : "") + " !\n\n" +
-                    "Commande enregistrée : " + totalHT + " HTVA (" + totalTTC + ").\n\n" +
+                    "Merci " + (typeClient === 'entreprise' ? company + " (" + name + ")" : name) + " !\n\n" +
+                    "Commande enregistrée (" + (typeClient === 'entreprise' ? "Facture pro - TVA: " + tva : "Particulier") + ") :\n" +
+                    totalHT + " HTVA (" + totalTTC + ").\n\n" +
                     "Instructions pour le virement :\n" +
                     "- Bénéficiaire : GST Énergie\n" +
                     "- IBAN : BE00 0000 0000 0000\n" +
-                    "- Communication : KIT-12V-" + name.toUpperCase()
-                );
-            }
-        }
+                    "- Communication : KIT-12V-" + (typeClient === 'entreprise' ? company.toUpperCase() : name.toUpperCase())
 
-        calculerPrix();
-    </script>
-</body>
-</html>
