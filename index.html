@@ -6,236 +6,299 @@
     <title>GST Énergie - Configurateur Kit Solaire Autonome 12V / 230V</title>
     <style>
         * { box-sizing: border-box; }
+        
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #e2e8f0;
-            color: #1e293b;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #2c3e50;
             margin: 0;
             padding: 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
+
+        /* --- EN-TÊTE COLORÉ --- */
         .hero-header {
-            background-color: #0f172a;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
-            padding: 35px 20px;
+            padding: 40px 20px;
             border-bottom: 5px solid #f59e0b;
         }
+
         .hero-container {
             max-width: 1150px;
             margin: 0 auto;
         }
+
         .brand-badge {
             display: inline-block;
             background-color: #f59e0b;
             color: #0f172a;
             font-weight: bold;
             font-size: 13px;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 6px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
         }
+
         .hero-header h1 {
             margin: 0 0 10px 0;
-            font-size: 28px;
+            font-size: 30px;
             color: #ffffff;
         }
+
         .hero-subtitle {
-            color: #cbd5e1;
+            color: #94a3b8;
             font-size: 16px;
             max-width: 780px;
-            margin: 0 0 20px 0;
+            margin: 0 0 25px 0;
         }
+
         .trust-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 20px;
-            border-top: 1px solid #334155;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .badge-item {
             flex: 1;
             min-width: 240px;
-            background-color: #1e293b;
-            padding: 12px 15px;
-            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 14px 18px;
+            border-radius: 8px;
             border-left: 4px solid #f59e0b;
             font-size: 14px;
             color: #f8fafc;
         }
+
+        /* --- MISE EN PAGE PRINCIPALE --- */
         .main-wrapper {
             max-width: 1150px;
-            margin: 30px auto;
+            margin: 35px auto;
             padding: 0 20px;
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
+            gap: 30px;
             align-items: flex-start;
         }
+
         .config-column {
             flex: 1.3;
             min-width: 320px;
         }
+
         .summary-panel {
             flex: 0.9;
             min-width: 300px;
             background-color: #ffffff;
-            border-radius: 8px;
-            border: 2px solid #0f172a;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            border: 2px solid #1e293b;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             overflow: hidden;
+            position: sticky;
+            top: 20px;
         }
+
+        /* --- CARTES D'ÉTAPES COLORÉES --- */
         .step-card {
             background-color: #ffffff;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-top: 4px solid #0f172a;
+            border-radius: 12px;
+            padding: 26px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #2563eb;
         }
+
         .step-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-            padding-bottom: 10px;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 2px solid #f1f5f9;
         }
+
         .step-number {
-            background-color: #f59e0b;
-            color: #0f172a;
+            background-color: #2563eb;
+            color: #ffffff;
             font-weight: bold;
             font-size: 16px;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .step-header h2 {
             margin: 0;
             font-size: 18px;
-            color: #0f172a;
+            color: #1e293b;
         }
+
         .field-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
+
         label {
             display: block;
             font-weight: bold;
             font-size: 14px;
-            color: #1e293b;
-            margin-bottom: 5px;
+            color: #334155;
+            margin-bottom: 6px;
         }
+
         .field-hint {
             display: block;
             font-size: 12px;
             color: #64748b;
             margin-bottom: 6px;
         }
+
         select, input {
             width: 100%;
-            padding: 11px 12px;
-            border: 1px solid #94a3b8;
-            border-radius: 6px;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             font-size: 15px;
-            color: #0f172a;
+            color: #1e293b;
             background-color: #f8fafc;
         }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
         .grid-2 {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 16px;
         }
         .grid-2 > div {
             flex: 1;
             min-width: 220px;
         }
+
+        /* --- PANNEAU RÉCAPITULATIF (DROITE) --- */
         .summary-header {
-            background-color: #0f172a;
+            background-color: #1e293b;
             color: #ffffff;
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-bottom: 3px solid #f59e0b;
         }
+
         .summary-header h3 {
             margin: 0;
             font-size: 18px;
+            color: #ffffff;
         }
+
         .summary-body {
-            padding: 20px;
+            padding: 24px;
         }
+
         .recap-title {
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
-            color: #475569;
+            color: #64748b;
             font-weight: bold;
-            margin: 0 0 10px 0;
+            letter-spacing: 0.5px;
+            margin: 0 0 12px 0;
         }
+
         .recap-list {
-            padding-left: 20px;
+            padding-left: 0;
+            list-style: none;
             margin: 0 0 20px 0;
-            color: #1e293b;
             font-size: 14px;
+            color: #334155;
         }
+
         .recap-list li {
-            margin-bottom: 8px;
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
         }
+
+        .recap-list li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
         .price-banner {
-            background-color: #f1f5f9;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 16px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 18px;
             text-align: right;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
+
         .price-label {
             font-size: 13px;
-            color: #475569;
+            color: #166534;
             font-weight: bold;
         }
+
         .total-price {
             font-size: 32px;
-            font-weight: bold;
-            color: #0284c7;
+            font-weight: 800;
+            color: #15803d;
             margin: 4px 0;
         }
+
         .tva-price {
             font-size: 15px;
-            color: #d97706;
+            color: #b45309;
             font-weight: bold;
         }
+
         .tech-note {
             background-color: #fef3c7;
             border-left: 4px solid #f59e0b;
             color: #92400e;
-            padding: 12px;
-            border-radius: 4px;
+            padding: 12px 14px;
+            border-radius: 6px;
             font-size: 13px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
+
         .btn-order {
-            background-color: #16a34a;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #ffffff;
             border: none;
             padding: 16px 20px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: background 0.2s;
         }
+
         .btn-order:hover {
-            background-color: #15803d;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
         }
+
         .site-footer {
             text-align: center;
-            padding: 25px 20px;
-            color: #475569;
+            padding: 30px 20px;
+            color: #64748b;
             font-size: 13px;
             border-top: 1px solid #cbd5e1;
-            margin-top: 40px;
+            margin-top: 50px;
             background-color: #ffffff;
         }
     </style>
@@ -244,20 +307,20 @@
 
     <header class="hero-header">
         <div class="hero-container">
-            <span class="brand-badge">GST Énergie - Solutions Pré-câblées</span>
+            <span class="brand-badge">⚡ GST Énergie — Solutions Pré-câblées</span>
             <h1>Coffret Solaire Autonome 12V / 230V (Van & Abri de Jardin)</h1>
             <p class="hero-subtitle">
                 Produisez votre propre électricité partout : une centrale solaire prête-à-brancher, sécurisée et assemblée en atelier pour votre utilitaire aménagé ou votre abri de jardin.
             </p>
             <div class="trust-badges">
                 <div class="badge-item">
-                    <strong>100 % Pré-câblé en atelier</strong><br>Cosses serties, repérage clair, prêt à poser
+                    <strong>🔌 100 % Pré-câblé en atelier</strong><br>Cosses serties, repérage clair, prêt à poser
                 </div>
                 <div class="badge-item">
-                    <strong>Sécurité AC / DC complète</strong><br>Coupe-batterie, Mega-Fuse & Différentiel 30mA
+                    <strong>🛡️ Sécurité AC / DC complète</strong><br>Coupe-batterie, Mega-Fuse & Différentiel 30mA
                 </div>
                 <div class="badge-item">
-                    <strong>Puissance Pur Sinus jusqu'à 3000W</strong><br>Idéal robot tondeuse, outillage, frigo & van
+                    <strong>☀️ Puissance Pur Sinus jusqu'à 3000W</strong><br>Idéal robot tondeuse, outillage, frigo & van
                 </div>
             </div>
         </div>
@@ -276,8 +339,8 @@
                     <label for="usage">Destination principale de votre installation</label>
                     <span class="field-hint">Adapte automatiquement les panneaux et les supports de fixation recommandés.</span>
                     <select id="usage" onchange="adapterFixationSelonUsage()">
-                        <option value="abri">Abri de jardin / Garage / Site isolé (Robot tondeuse, éclairage, outils)</option>
-                        <option value="van">Véhicule Utilitaire / Fourgon / Van aménagé</option>
+                        <option value="abri">🏡 Abri de jardin / Garage / Site isolé (Robot tondeuse, éclairage, outils)</option>
+                        <option value="van">🚐 Véhicule Utilitaire / Fourgon / Van aménagé</option>
                     </select>
                 </div>
 
@@ -365,9 +428,9 @@
                 <div class="field-group">
                     <label for="paiement">Moyen de paiement sécurisé souhaité</label>
                     <select id="paiement">
-                        <option value="virement">Virement bancaire instantané / Bancontact (Sans frais)</option>
-                        <option value="alma">Alma - Paiement échelonné en 2x, 3x ou 4x</option>
-                        <option value="paypal">PayPal (Compte PayPal ou Carte bancaire)</option>
+                        <option value="virement">🏦 Virement bancaire instantané / Bancontact (Sans frais)</option>
+                        <option value="alma">💳 Alma - Paiement échelonné en 2x, 3x ou 4x</option>
+                        <option value="paypal">🅿️ PayPal (Compte PayPal ou Carte bancaire)</option>
                     </select>
                 </div>
             </div>
@@ -376,7 +439,7 @@
 
         <aside class="summary-panel">
             <div class="summary-header">
-                <h3>Votre Configuration</h3>
+                <h3>📋 Votre Configuration</h3>
             </div>
             <div class="summary-body">
                 <p class="recap-title">Matériel inclus & pré-câblé :</p>
@@ -391,7 +454,7 @@
                 <div class="tech-note" id="note-technique"></div>
 
                 <button type="button" class="btn-order" onclick="validerCommande()">
-                    Valider ma configuration & Commander
+                    Valider ma configuration & Commander →
                 </button>
             </div>
         </aside>
@@ -407,22 +470,22 @@
         // GRILLE TARIFAIRE GST ENERGIE (PRIX DE VENTE HTVA EN EUROS)
         // ============================================================================
         var PRIX_VENTE = {
-            baseCoffret12V: 340,
-            mpptStandard: 120,
-            mpptBluetooth: 195,
+            baseCoffret12V: 490,
+            mpptStandard: 140,
+            mpptBluetooth: 220,
             convertisseurAucun: 0,
-            convertisseur1000W: 240,
-            convertisseur3000W: 440,
-            coffretSecurite230V: 75,
+            convertisseur1000W: 320,
+            convertisseur3000W: 580,
+            coffretSecurite230V: 85,
             panneauxAucun: 0,
-            panneauxAbri2P: 260,
-            panneauxVan2P: 340,
+            panneauxAbri2P: 290,
+            panneauxVan2P: 380,
             fixationAucune: 0,
-            fixationAbriPlat: 85,
-            fixationAbriIncline: 120,
-            fixationVan: 95,
+            fixationAbriPlat: 95,
+            fixationAbriIncline: 130,
+            fixationVan: 110,
             batterieAucune: 0,
-            batterieLiFePO4: 690
+            batterieLiFePO4: 750
         };
 
         function adapterFixationSelonUsage() {
