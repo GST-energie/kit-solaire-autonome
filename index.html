@@ -5,235 +5,235 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GST Énergie - Configurateur Kit Solaire Autonome 12V / 230V</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        h1 { color: #d9534f; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 12px; margin-top: 0; }
-        h3 { color: #2c3e50; margin-bottom: 10px; border-left: 4px solid #0275d8; padding-left: 10px; }
-        .section { margin-bottom: 28px; }
-        label { display: block; font-weight: 600; margin-top: 15px; font-size: 14px; color: #444; }
-        select, input { width: 100%; padding: 11px; margin-top: 6px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 15px; background: #fff; }
-        .recap-box { background: #f8f9fa; border: 1px solid #e2e6ea; padding: 15px 20px; border-radius: 6px; margin-top: 20px; }
-        .recap-box h4 { margin: 0 0 10px 0; color: #333; font-size: 15px; }
-        .recap-list { margin: 0; padding-left: 20px; font-size: 14px; color: #555; line-height: 1.6; }
-        .price-box { background: #eef9ff; border: 1px solid #bce8f1; padding: 20px; border-radius: 6px; margin-top: 20px; text-align: right; }
-        .price-line { font-size: 15px; color: #555; margin-bottom: 5px; }
-        .total-price { font-size: 30px; color: #0275d8; font-weight: bold; }
-        .tva-price { font-size: 16px; color: #333; font-weight: 600; margin-top: 4px; }
-        .tech-note { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 12px; border-radius: 5px; margin-top: 15px; font-size: 13px; text-align: left; line-height: 1.4; }
-        button { background: #28a745; color: white; border: none; padding: 16px 20px; font-size: 17px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; transition: background 0.2s; }
-        button:hover { background: #218838; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>GST Énergie - Kit Solaire Autonome Pré-câblé 12V / 230V</h1>
-        
-        <div class="section">
-            <h3>1. Vos Coordonnées de Facturation & Livraison</h3>
-            <div class="grid-2">
-                <div>
-                    <label for="name">Nom et Prénom *</label>
-                    <input type="text" id="name" placeholder="Ex: Jean Dupont">
-                </div>
-                <div>
-                    <label for="company">Société & N° TVA (Optionnel)</label>
-                    <input type="text" id="company" placeholder="Ex: Dupont SRL - BE0123.456.789">
-                </div>
-            </div>
-            <div class="grid-2">
-                <div>
-                    <label for="email">Adresse Email *</label>
-                    <input type="email" id="email" placeholder="contact@domaine.be">
-                </div>
-                <div>
-                    <label for="phone">Téléphone *</label>
-                    <input type="tel" id="phone" placeholder="+32 470 00 00 00">
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h3>2. Configuration de votre Coffret & Équipement Solaire</h3>
-            
-            <label for="usage">Destination principale du kit</label>
-            <select id="usage" onchange="adapterFixationSelonUsage()">
-                <option value="abri">Abri de jardin / Garage / Site isolé (Robot tondeuse, éclairage, outils)</option>
-                <option value="van">Véhicule Utilitaire / Fourgon / Van aménagé</option>
-            </select>
-
-            <label for="mppt">Régulateur de charge Solaire MPPT intégré</label>
-            <select id="mppt" onchange="calculerPrix()">
-                <option value="standard">MPPT 30A/40A Standard (Excellent rapport qualité/prix - Jusqu'à 2 panneaux)</option>
-                <option value="bluetooth">MPPT Smart Bluetooth (Suivi sur smartphone type Victron)</option>
-            </select>
-
-            <label for="convertisseur">Option Convertisseur 12V vers 230V Pur Sinus + Sécurité 230V</label>
-            <select id="convertisseur" onchange="calculerPrix()">
-                <option value="aucun">Sans convertisseur 230V (Sorties 12V uniquement)</option>
-                <option value="1000w">Convertisseur 1000W Pur Sinus + Coffret protection 230V</option>
-                <option value="3000w" selected>Pack Puissance 3000W Pur Sinus + Câblage 50mm² + Coffret sécurité 230V</option>
-            </select>
-
-            <label for="panneaux">Option Pack 2 Panneaux Solaires + Câbles 6mm² MC4</label>
-            <select id="panneaux" onchange="calculerPrix()">
-                <option value="aucun">Sans panneaux solaires (J'ai déjà mes panneaux ou système pliable mobile)</option>
-                <option value="abri_2p" selected>Pack 2 Panneaux Toiture/Abri (2x 400W-450W) + Rallonges 6mm² MC4</option>
-                <option value="van_2p">Pack 2 Panneaux Spécial Fourgon/Van (Format compact 12V) + Rallonges 6mm² MC4</option>
-            </select>
-
-            <label for="fixation">Kit de Fixation Toiture & Passage de Câbles Étanche (Pour 2 panneaux)</label>
-            <select id="fixation" onchange="calculerPrix()">
-                <option value="aucune">Sans kit de fixation (Pose par mes soins ou panneaux mobiles au sol)</option>
-                <option value="fix_abri_plat" selected>Kit Toit Abri Standard (Bitume/Bac acier/EPDM) + Presse-étoupe étanche</option>
-                <option value="fix_abri_incline">Kit Toit Abri Incliné renforcé (Tuiles/Tôle ondulée/Chevrons) + Passe-câble</option>
-                <option value="fix_van">Kit Spécial Toit Fourgon : Supports ABS + Colle pro Sikaflex + Passe-toit étanche double</option>
-            </select>
-
-            <label for="batterie">Option Batterie de Stockage 12V</label>
-            <select id="batterie" onchange="calculerPrix()">
-                <option value="aucune">Sans batterie (Fournie par mes soins)</option>
-                <option value="lifepo4_200">Batterie Lithium LiFePO4 12V 200Ah-250Ah (Recommandée pour 3000W)</option>
-            </select>
-        </div>
-
-        <div class="recap-box">
-            <h4>📋 Détail du matériel inclus et pré-câblé dans votre configuration :</h4>
-            <ul class="recap-list" id="liste-materiel"></ul>
-        </div>
-
-        <div class="section" style="margin-top: 25px;">
-            <h3>3. Mode de Règlement</h3>
-            <label for="paiement">Choisissez votre moyen de paiement sécurisé :</label>
-            <select id="paiement">
-                <option value="virement">Virement bancaire instantané / Bancontact (Sans frais)</option>
-                <option value="alma">Alma - Paiement échelonné en 2x, 3x ou 4x</option>
-                <option value="paypal">PayPal (Compte PayPal ou Carte bancaire)</option>
-            </select>
-        </div>
-
-        <div class="price-box">
-            <div class="price-line">Montant Total HTVA :</div>
-            <div class="total-price" id="total-ht">0,00 €</div>
-            <div class="tva-price" id="total-ttc">Soit 0,00 € TVAC (21%)</div>
-            
-            <div class="tech-note" id="note-technique"></div>
-        </div>
-
-        <button onclick="validerCommande()">Valider ma configuration et passer au paiement</button>
-    </div>
-
-    <script>
-        // ============================================================================
-        // GRILLE TARIFAIRE GST ÉNERGIE (PRIX DE VENTE HTVA EN EUROS)
-        // Vérification mensuelle : ajuste ces tarifs selon l'évolution des fournisseurs
-        // ============================================================================
-        const PRIX_VENTE = {
-            // 1. Base du coffret 12V pré-câblé (Achat matériel ~190€ + montage)
-            baseCoffret12V: 340,
-
-            // 2. Régulateur Solaire MPPT
-            mpptStandard: 120,          // Achat ~85€
-            mpptBluetooth: 195,         // Achat ~145€
-
-            // 3. Convertisseur 12V/230V Pur Sinus + Câblage puissance + Fusible Mega
-            convertisseurAucun: 0,
-            convertisseur1000W: 240,    // Convertisseur 1000W + Mega-Fuse 125A + câbles 25mm²
-            convertisseur3000W: 440,    // Convertisseur 3000W + Mega-Fuse 300A + câbles 50mm² sertis
-
-            // 4. Coffret de sécurité Sortie 230V (Différentiel 30mA Type A + Disjoncteur 16A + Prise DIN)
-            coffretSecurite230V: 75,    // Achat ~40€
-
-            // 5. Pack 2 Panneaux Solaires + Rallonges solaires 6mm² MC4
-            panneauxAucun: 0,
-            panneauxAbri2P: 260,        // Achat ~150€ (2x 400W-450W + rallonges MC4)
-            panneauxVan2P: 340,         // Achat ~220€ (2x panneaux compacts 12V + rallonges MC4)
-
-            // 6. Kits de fixation toiture & Passage de câbles étanche (pour 2 panneaux)
-            fixationAucune: 0,
-            fixationAbriPlat: 85,       // Achat ~45€ (Mini-rails alu/pattes Z, étriers, vis Inox + presse-étoupe)
-            fixationAbriIncline: 120,   // Achat ~65€ (Vis double filetage/crochets, rails alu, étriers + passe-câble)
-            fixationVan: 95,            // Achat ~55€ (2x kits cornières ABS, 2x colle Sikaflex + passe-toit étanche double)
-
-            // 7. Option Batterie Lithium LiFePO4 (BMS 200A/250A pour supporter 3000W)
-            batterieAucune: 0,
-            batterieLiFePO4: 690        // Achat ~450€
-        };
-        // ============================================================================
-
-        // Change automatiquement la pré-sélection des panneaux et fixations si le client choisit "Van" ou "Abri"
-        function adapterFixationSelonUsage() {
-            const usage = document.getElementById('usage').value;
-            const selectPanneaux = document.getElementById('panneaux');
-            const selectFixation = document.getElementById('fixation');
-
-            if (usage === 'van') {
-                if (selectPanneaux.value === 'abri_2p') selectPanneaux.value = 'van_2p';
-                if (selectFixation.value !== 'aucune') selectFixation.value = 'fix_van';
-            } else {
-                if (selectPanneaux.value === 'van_2p') selectPanneaux.value = 'abri_2p';
-                if (selectFixation.value === 'fix_van') selectFixation.value = 'fix_abri_plat';
-            }
-            calculerPrix();
+        :root {
+            --primary-dark: #0f172a;
+            --primary-blue: #1e293b;
+            --accent-amber: #f59e0b;
+            --accent-amber-hover: #d97706;
+            --accent-green: #10b981;
+            --accent-green-hover: #059669;
+            --bg-light: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
         }
 
-        function calculerPrix() {
-            const usage = document.getElementById('usage').value;
-            const mppt = document.getElementById('mppt').value;
-            const convertisseur = document.getElementById('convertisseur').value;
-            const panneaux = document.getElementById('panneaux').value;
-            const fixation = document.getElementById('fixation').value;
-            const batterie = document.getElementById('batterie').value;
+        * { box-sizing: border-box; }
 
-            let totalHT = PRIX_VENTE.baseCoffret12V;
-            let listeMateriel = [
-                "Coffret/platine pré-câblé avec coupe-batterie 275A et jeux de barres (Busbars) 300A",
-                "Entrée solaire protégée : Disjoncteur DC bipolaire + connecteurs MC4 châssis (+ et -)",
-                "Boîte à fusibles 12V (avec voyants LED) pour vos départs 12V (éclairage, frigo, USB)"
-            ];
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
 
-            // 1. Calcul MPPT
-            if (mppt === 'bluetooth') {
-                totalHT += PRIX_VENTE.mpptBluetooth;
-                listeMateriel.push("Régulateur MPPT Smart Bluetooth + protection fusible Midi-Fuse");
-            } else {
-                totalHT += PRIX_VENTE.mpptStandard;
-                listeMateriel.push("Régulateur solaire MPPT 30A/40A + protection fusible Midi-Fuse");
+        /* --- EN-TÊTE PROFESSIONNEL (HERO) --- */
+        .hero-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: #ffffff;
+            padding: 40px 20px 35px 20px;
+            border-bottom: 4px solid var(--accent-amber);
+        }
+
+        .hero-container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+
+        .hero-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            color: #cbd5e1;
+            font-size: 17px;
+            max-width: 780px;
+            margin: 0 0 25px 0;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        .badge-icon {
+            background: var(--accent-amber);
+            color: var(--primary-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* --- STRUCTURE PRINCIPALE EN 2 COLONNES --- */
+        .main-wrapper {
+            max-width: 1180px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.35fr 0.85fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 920px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
             }
+        }
 
-            // 2. Calcul Convertisseur + Coffret Protection 230V automatique
-            if (convertisseur === '1000w') {
-                totalHT += PRIX_VENTE.convertisseur1000W + PRIX_VENTE.coffretSecurite230V;
-                listeMateriel.push("Convertisseur 12V/230V Pur Sinus 1000W + Fusible Mega-Fuse 125A + Câbles souples");
-                listeMateriel.push("Coffret protection 230V : Différentiel 30mA Type A + Disjoncteur 16A + Prise 230V DIN");
-            } else if (convertisseur === '3000w') {
-                totalHT += PRIX_VENTE.convertisseur3000W + PRIX_VENTE.coffretSecurite230V;
-                listeMateriel.push("Convertisseur 12V/230V Pur Sinus 3000W + Porte-fusible Mega-Fuse 300A + Câbles 50 mm² sertis");
-                listeMateriel.push("Coffret protection 230V : Différentiel 30mA Type A + Disjoncteur 16A + Prise 230V DIN");
-            }
+        /* --- CARTES D'ÉTAPES --- */
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 26px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+            border: 1px solid var(--border-color);
+        }
 
-            // 3. Calcul Panneaux Solaires
-            if (panneaux === 'abri_2p') {
-                totalHT += PRIX_VENTE.panneauxAbri2P;
-                listeMateriel.push("2x Panneaux solaires haute performance (400W-450W) + Rallonges solaires 6 mm² MC4");
-            } else if (panneaux === 'van_2p') {
-                totalHT += PRIX_VENTE.panneauxVan2P;
-                listeMateriel.push("2x Panneaux solaires format compact spécial toit utilitaire + Rallonges 6 mm² MC4");
-            }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--bg-light);
+        }
 
-            // 4. Calcul Fixations & Passage de câbles
-            if (fixation === 'fix_abri_plat') {
-                totalHT += PRIX_VENTE.fixationAbriPlat;
-                listeMateriel.push("Kit fixation toit abri (Mini-rails alu/pattes Z, étriers, visserie Inox + joints EPDM) + Presse-étoupe étanche");
-            } else if (fixation === 'fix_abri_incline') {
-                totalHT += PRIX_VENTE.fixationAbriIncline;
-                listeMateriel.push("Kit fixation toit incliné sur chevrons (Tirefonds double filetage, rails alu, étriers Inox) + Passe-câble étanche");
-            } else if (fixation === 'fix_van') {
-                totalHT += PRIX_VENTE.fixationVan;
-                listeMateriel.push("Kit pose toit Fourgon : Supports d'angle ABS (2 panneaux) + Colle structurelle Sikaflex + Passe-toit étanche IP68 double entrée");
-            }
+        .step-number {
+            background: var(--primary-dark);
+            color: var(--accent-amber);
+            font-weight: 800;
+            font-size: 15px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-            // 5. Calcul Batterie
-            if (batterie === 'lifepo4_200') {
-                totalHT += PRIX_VENTE.batterieLiFe
+        .step-header h2 {
+            margin: 0;
+            font-size: 19px;
+            color: var(--primary-dark);
+        }
+
+        /* --- CHAMPS DE FORMULAIRE --- */
+        .field-group {
+            margin-bottom: 18px;
+        }
+
+        .field-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .field-hint {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        select:hover, input:hover {
+            border-color: #94a3b8;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-amber);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        /* --- COLONNE DROITE : RÉCAPITULATIF & PRIX (STICKY) --- */
+        .summary-panel {
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 2px solid var(--primary-blue);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+            position: sticky;
+            top: 20px;
+            overflow: hidden;
+        }
+
+        .summary-header {
+            background: var(--primary-dark);
+            color: #ffffff;
+            padding: 18px 22px;
+            border-bottom: 3px solid var(--accent-amber);
+        }
+
+        .summary-header h3 {
+            margin: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8
