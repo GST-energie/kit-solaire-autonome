@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Énergie - Simulateur & Chiffrage de Coffret de Délestage</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 650px; background: #fff; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #1a73e8; font-size: 22px; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #1a73e8; color: #fff; border: none; padding: 12px; width: 100%; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background: #1557b0; }
+        .result-box { background: #e8f0fe; border-left: 4px solid #1a73e8; padding: 15px; margin-top: 20px; border-radius: 4px; display: none; }
+        .notice { background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; margin: 15px 0; font-size: 13px; border-radius: 4px; }
+        footer { text-align: center; margin-top: 30px; font-size: 12px; color: #777; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>GST Énergie</h1>
+    <div class="subtitle">Simulateur intelligent & Chiffrage de coffret de délestage</div>
+
+    <!-- ÉTAPE 1 : SIMULATION TECHNIQUE -->
+    <div class="form-group">
+        <label for="disjoncteur">Calibre de votre disjoncteur principal (Belgique) :</label>
+        <select id="disjoncteur">
+            <option value="32">Monophasé 32A (7,4 kVA)</option>
+            <option value="40" selected>Monophasé 40A (9,2 kVA)</option>
+            <option value="50">Monophasé 50A (11,5 kVA)</option>
+            <option value="63">Monophasé 63A (14,5 kVA)</option>
+            <option value="tri30">Triphasé 30A (20,7 kVA)</option>
+            <option value="tri40">Triphasé 40A (27,6 kVA)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Équipements énergivores présents :</label>
+        <label style="font-weight: normal;"><input type="checkbox" id="chauffeEau" checked> Chauffe-eau / Boiler</label>
+        <label style="font-weight: normal;"><input type="checkbox" id="borneVE"> Borne de recharge Véhicule Électrique</label>
+        <label style="font-weight: normal;"><input type="checkbox" id="pac"> Pompe à Chaleur / Clim</label>
+    </div>
+
+    <button type="button" onclick="calculerDelestage()">Calculer mon besoin & mon coffret</button>
+
+    <!-- ÉTAPE 2 : RÉSULTAT ET COORDONNÉES CLIENT -->
+    <div id="resultSection" class="result-box">
+        <h3>Diagnostic & Proposition GST Énergie</h3>
+        <p id="diagnosticText"></p>
+
+        <div class="notice">
+            📅 <strong>Planning & Délais actuels :</strong> Assemblage artisanal et tests rigoureux dans nos ateliers belges. Délai moyen constaté pour la livraison et la mise en service : <strong>10 à 15 jours ouvrés</strong> (selon validation de tournée).
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #d2e3fc; margin: 15px 0;">
+
+        <h4>Vos coordonnées pour finaliser la demande :</h4>
+        
+        <div class="form-group">
+            <label for="nom">Nom / Société :</label>
+            <input type="text" id="nom" placeholder="Votre nom ou nom de société">
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" placeholder="votre@email.be">
+        </div>
+        <div class="form-group">
+            <label for="telephone">Téléphone :</label>
+            <input type="text" id="telephone" placeholder="04xx xx xx xx">
+        </div>
+        <div class="form-group">
+            <label for="distance">Votre distance (en km aller-retour depuis notre base) :</label>
+            <input type="number" id="distance" placeholder="Ex: 25">
+        </div>
+
+        <div class="form-group">
+            <label for="modePaiement">Mode de règlement souhaité :</label>
+            <select id="modePaiement">
+                <option value="devis">Recevoir un devis officiel (Virement bancaire / Facture pro)</option>
+                <option value="paypal">Paiement sécurisé en ligne / Acompte (PayPal & Cartes)</option>
+            </select>
+        </div>
+
+        <button type="button" style="background: #28a745;" onclick="validerCommande()">Valider ma demande / Commander</button>
+    </div>
+
+    <footer>
+        <strong>GST Énergie</strong> — Installation, mise en conformité et solutions de gestion d'énergie en Belgique.<br>
+        Numéro de TVA : <strong>BE 0726.338.077</strong> | <a href="mailto:contact@gst-energie.be">Contactez-nous</a>
+    </footer>
+</div>
+
+<script>
+function calculerDelestage() {
+    var disJ = document.getElementById('disjoncteur').value;
+    var ce = document.getElementById('chauffeEau').checked;
+    var ve = document.getElementById('borneVE').checked;
+    var pac = document.getElementById('pac').checked;
+
+    var txt = "<strong>Solution adaptée :</strong> Coffret de délestage intelligent pré-assemblé conforme RGIE.<br>";
+    if (ve || pac) {
+        txt += "⚠️ Risque de surcharge identifié avec vos équipements actuels. Le délesteur priorisera automatiquement vos circuits pour éviter les coupures de disjoncteur et l'excès de réinjection.";
+    } else {
+        txt += "✅ Optimisation idéale de votre autoconsommation et sécurisation de votre tableau électrique.";
+    }
+
+    document.getElementById('diagnosticText').innerHTML = txt;
+    document.getElementById('resultSection').style.display = 'block';
+}
+
+function validerCommande() {
+    var nom = document.getElementById('nom').value;
+    var email = document.getElementById('email').value;
+    var mode = document.getElementById('modePaiement').value;
+
+    if(!nom || !email) {
+        alert("Veuillez renseigner au moins votre nom et votre e-mail.");
+        return;
+    }
+
+    if(mode === 'paypal') {
+        alert("Redirection vers le système de paiement sécurisé...");
+        // Ici tu pourras insérer ton lien de paiement ou ton bouton PayPal pro
+    } else {
+        alert("Merci " + nom + " ! Votre demande de devis a bien été prise en compte. Nous vous envoyons les détails par e-mail avec le calcul de déplacement.");
+    }
+}
+</script>
+
+</body>
+</html>
