@@ -236,4 +236,480 @@
             font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 8
+            gap: 8px;
+        }
+
+        .summary-body {
+            padding: 22px;
+        }
+
+        .recap-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin: 0 0 12px 0;
+        }
+
+        .recap-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .recap-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.45;
+        }
+
+        .recap-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-green);
+            font-weight: 900;
+        }
+
+        .price-banner {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            text-align: right;
+            margin-bottom: 16px;
+        }
+
+        .price-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .total-price {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 4px 0;
+        }
+
+        .tva-price {
+            font-size: 15px;
+            color: var(--accent-amber-hover);
+            font-weight: 700;
+        }
+
+        .tech-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--accent-amber);
+            color: #92400e;
+            padding: 12px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.45;
+            margin-bottom: 18px;
+        }
+
+        .btn-order {
+            background: var(--accent-green);
+            color: #ffffff;
+            border: none;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-order:hover {
+            background: var(--accent-green-hover);
+        }
+
+        .btn-order:active {
+            transform: translateY(1px);
+        }
+
+        /* --- PIED DE PAGE --- */
+        .site-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BANNIÈRE D'EN-TÊTE PROFESSIONNELLE -->
+    <header class="hero-header">
+        <div class="hero-container">
+            <span class="brand-badge">⚡ GST Énergie — Solutions Électriques Pré-câblées</span>
+            <h1>Coffret Solaire Autonome 12V / 230V (Van & Abri de Jardin)</h1>
+            <p class="hero-subtitle">
+                Produisez votre propre électricité partout : une centrale solaire prête-à-brancher, sécurisée et assemblée en atelier pour votre utilitaire aménagé ou votre abri de jardin.
+            </p>
+            <div class="trust-badges">
+                <div class="badge-item">
+                    <div class="badge-icon">🔌</div>
+                    <div><strong>100 % Pré-câblé en atelier</strong><br>Cosses serties, repérage clair, prêt à poser</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">🛡️</div>
+                    <div><strong>Sécurité AC / DC complète</strong><br>Coupe-batterie, Mega-Fuse & Différentiel 30mA</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">☀️</div>
+                    <div><strong>Puissance Pur Sinus jusqu'à 3000W</strong><br>Idéal robot tondeuse, outillage, frigo & van</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL EN 2 COLONNES -->
+    <main class="main-wrapper">
+        
+        <!-- COLONNE GAUCHE : LES ÉTAPES DE CONFIGURATION -->
+        <div class="config-column">
+
+            <!-- ÉTAPE 1 : CONFIGURATION TECHNIQUE -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2>Usage & Cœur Électrique du Coffret</h2>
+                </div>
+
+                <div class="field-group">
+                    <label for="usage">Destination principale de votre installation</label>
+                    <span class="field-hint">Adapte automatiquement les panneaux et les supports de fixation recommandés.</span>
+                    <select id="usage" onchange="adapterFixationSelonUsage()">
+                        <option value="abri">🏡 Abri de jardin / Garage / Site isolé (Robot tondeuse, éclairage, outils)</option>
+                        <option value="van">🚐 Véhicule Utilitaire / Fourgon / Van aménagé</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="mppt">Régulateur de charge Solaire MPPT intégré</label>
+                    <select id="mppt" onchange="calculerPrix()">
+                        <option value="standard">MPPT 30A/40A Standard (Fiable et robuste — Jusqu'à 2 panneaux)</option>
+                        <option value="bluetooth">MPPT Smart Bluetooth (Suivi de production en direct sur smartphone)</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="convertisseur">Option Convertisseur 12V vers 230V Pur Sinus + Coffret Sécurité 230V</label>
+                    <span class="field-hint">Chaque convertisseur inclut d'office son coffret Différentiel 30mA + Disjoncteur 16A + Prise 230V.</span>
+                    <select id="convertisseur" onchange="calculerPrix()">
+                        <option value="aucun">Sans convertisseur 230V (Sorties 12V protégées uniquement)</option>
+                        <option value="1000w">Convertisseur 1000W Pur Sinus + Câblage + Coffret protection 230V</option>
+                        <option value="3000w" selected>Pack Puissance 3000W Pur Sinus + Câblage 50mm² + Mega-Fuse 300A + Coffret 230V</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 2 : PANNEAUX, FIXATIONS & BATTERIE -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2>Panneaux Solaires, Fixations & Stockage</h2>
+                </div>
+
+                <div class="field-group">
+                    <label for="panneaux">Pack 2 Panneaux Solaires + Rallonges 6mm² MC4</label>
+                    <select id="panneaux" onchange="calculerPrix()">
+                        <option value="aucun">Sans panneaux solaires (J'ai déjà mes panneaux ou système pliable mobile)</option>
+                        <option value="abri_2p" selected>Pack 2 Panneaux Toiture/Abri (2x 400W-450W) + Câbles solaires 6mm² MC4</option>
+                        <option value="van_2p">Pack 2 Panneaux Spécial Fourgon/Van (Format compact 12V) + Câbles 6mm² MC4</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="fixation">Kit de Fixation Toiture & Passage de Câbles Étanche (Pour 2 panneaux)</label>
+                    <select id="fixation" onchange="calculerPrix()">
+                        <option value="aucune">Sans kit de fixation (Pose par mes soins ou panneaux mobiles au sol)</option>
+                        <option value="fix_abri_plat" selected>Kit Toit Abri Standard (Bitume/Bac acier/EPDM) + Presse-étoupe étanche</option>
+                        <option value="fix_abri_incline">Kit Toit Abri Incliné renforcé (Tuiles/Tôle ondulée/Chevrons) + Passe-câble</option>
+                        <option value="fix_van">Kit Spécial Toit Fourgon : Cornières ABS + Colle pro Sikaflex + Passe-toit IP68</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="batterie">Option Batterie de Stockage 12V</label>
+                    <select id="batterie" onchange="calculerPrix()">
+                        <option value="aucune">Sans batterie (Fournie par mes soins)</option>
+                        <option value="lifepo4_200">Batterie Lithium LiFePO4 12V 200Ah-250Ah (Recommandée pour 3000W)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 3 : COORDONNÉES & PAIEMENT -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2>Vos Coordonnées & Mode de Règlement</h2>
+                </div>
+
+                <div class="grid-2">
+                    <div class="field-group">
+                        <label for="name">Nom et Prénom *</label>
+                        <input type="text" id="name" placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="field-group">
+                        <label for="company">Société & N° TVA (Optionnel)</label>
+                        <input type="text" id="company" placeholder="Ex: Dupont SRL - BE0123.456.789">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="field-group">
+                        <label for="email">Adresse Email *</label>
+                        <input type="email" id="email" placeholder="contact@domaine.be">
+                    </div>
+                    <div class="field-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" placeholder="+32 470 00 00 00">
+                    </div>
+                </div>
+
+                <div class="field-group" style="margin-top: 10px;">
+                    <label for="paiement">Moyen de paiement sécurisé souhaité</label>
+                    <select id="paiement">
+                        <option value="virement">🏦 Virement bancaire instantané / Bancontact (Sans frais)</option>
+                        <option value="alma">💳 Alma — Paiement échelonné en 2x, 3x ou 4x</option>
+                        <option value="paypal">🅿️ PayPal (Compte PayPal ou Carte bancaire)</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLONNE DROITE : PANIER RÉCAPITULATIF FIXE -->
+        <aside class="summary-panel">
+            <div class="summary-header">
+                <h3>📋 Votre Configuration sur Mesure</h3>
+            </div>
+            <div class="summary-body">
+                <p class="recap-title">Matériel inclus & pré-câblé :</p>
+                <ul class="recap-list" id="liste-materiel"></ul>
+
+                <div class="price-banner">
+                    <div class="price-label">Montant Total HTVA</div>
+                    <div class="total-price" id="total-ht">0,00 €</div>
+                    <div class="tva-price" id="total-ttc">Soit 0,00 € TVAC (21%)</div>
+                </div>
+
+                <div class="tech-note" id="note-technique"></div>
+
+                <button class="btn-order" onclick="validerCommande()">
+                    Valider ma configuration & Commander →
+                </button>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- PIED DE PAGE -->
+    <footer class="site-footer">
+        <strong>GST Énergie</strong> — Assemblage et pré-câblage de coffrets électriques et solaires autonomes.<br>
+        Conception standardisée en atelier • Composants protégés et calibrés selon les règles de l'art.
+    </footer>
+
+    <script>
+        // ============================================================================
+        // GRILLE TARIFAIRE GST ÉNERGIE (PRIX DE VENTE HTVA EN EUROS)
+        // Vérification mensuelle : ajuste ces tarifs selon l'évolution des fournisseurs
+        // ============================================================================
+        const PRIX_VENTE = {
+            // 1. Base du coffret 12V pré-câblé (Achat matériel ~190€ + montage)
+            baseCoffret12V: 340,
+
+            // 2. Régulateur Solaire MPPT
+            mpptStandard: 120,          // Achat ~85€
+            mpptBluetooth: 195,         // Achat ~145€
+
+            // 3. Convertisseur 12V/230V Pur Sinus + Câblage puissance + Fusible Mega
+            convertisseurAucun: 0,
+            convertisseur1000W: 240,    // Convertisseur 1000W + Mega-Fuse 125A + câbles 25mm²
+            convertisseur3000W: 440,    // Convertisseur 3000W + Mega-Fuse 300A + câbles 50mm² sertis
+
+            // 4. Coffret de sécurité Sortie 230V (Différentiel 30mA Type A + Disjoncteur 16A + Prise DIN)
+            coffretSecurite230V: 75,    // Achat ~40€
+
+            // 5. Pack 2 Panneaux Solaires + Rallonges solaires 6mm² MC4
+            panneauxAucun: 0,
+            panneauxAbri2P: 260,        // Achat ~150€ (2x 400W-450W + rallonges MC4)
+            panneauxVan2P: 340,         // Achat ~220€ (2x panneaux compacts 12V + rallonges MC4)
+
+            // 6. Kits de fixation toiture & Passage de câbles étanche (pour 2 panneaux)
+            fixationAucune: 0,
+            fixationAbriPlat: 85,       // Achat ~45€ (Mini-rails alu/pattes Z, étriers, vis Inox + presse-étoupe)
+            fixationAbriIncline: 120,   // Achat ~65€ (Vis double filetage/crochets, rails alu, étriers + passe-câble)
+            fixationVan: 95,            // Achat ~55€ (2x kits cornières ABS, 2x colle Sikaflex + passe-toit étanche double)
+
+            // 7. Option Batterie Lithium LiFePO4 (BMS 200A/250A pour supporter 3000W)
+            batterieAucune: 0,
+            batterieLiFePO4: 690        // Achat ~450€
+        };
+        // ============================================================================
+
+        function adapterFixationSelonUsage() {
+            const usage = document.getElementById('usage').value;
+            const selectPanneaux = document.getElementById('panneaux');
+            const selectFixation = document.getElementById('fixation');
+
+            if (usage === 'van') {
+                if (selectPanneaux.value === 'abri_2p') selectPanneaux.value = 'van_2p';
+                if (selectFixation.value !== 'aucune') selectFixation.value = 'fix_van';
+            } else {
+                if (selectPanneaux.value === 'van_2p') selectPanneaux.value = 'abri_2p';
+                if (selectFixation.value === 'fix_van') selectFixation.value = 'fix_abri_plat';
+            }
+            calculerPrix();
+        }
+
+        function calculerPrix() {
+            const usage = document.getElementById('usage').value;
+            const mppt = document.getElementById('mppt').value;
+            const convertisseur = document.getElementById('convertisseur').value;
+            const panneaux = document.getElementById('panneaux').value;
+            const fixation = document.getElementById('fixation').value;
+            const batterie = document.getElementById('batterie').value;
+
+            let totalHT = PRIX_VENTE.baseCoffret12V;
+            let listeMateriel = [
+                "Coffret/platine pré-câblé avec coupe-batterie 275A et jeux de barres (Busbars) 300A",
+                "Entrée solaire protégée : Disjoncteur DC bipolaire + connecteurs MC4 châssis (+ et -)",
+                "Boîte à fusibles 12V (avec voyants LED) pour vos départs 12V (éclairage, frigo, USB)"
+            ];
+
+            if (mppt === 'bluetooth') {
+                totalHT += PRIX_VENTE.mpptBluetooth;
+                listeMateriel.push("Régulateur MPPT Smart Bluetooth + protection fusible Midi-Fuse");
+            } else {
+                totalHT += PRIX_VENTE.mpptStandard;
+                listeMateriel.push("Régulateur solaire MPPT 30A/40A + protection fusible Midi-Fuse");
+            }
+
+            if (convertisseur === '1000w') {
+                totalHT += PRIX_VENTE.convertisseur1000W + PRIX_VENTE.coffretSecurite230V;
+                listeMateriel.push("Convertisseur 12V/230V Pur Sinus 1000W + Fusible Mega-Fuse 125A + Câbles souples");
+                listeMateriel.push("Coffret protection 230V : Différentiel 30mA Type A + Disjoncteur 16A + Prise 230V DIN");
+            } else if (convertisseur === '3000w') {
+                totalHT += PRIX_VENTE.convertisseur3000W + PRIX_VENTE.coffretSecurite230V;
+                listeMateriel.push("Convertisseur 12V/230V Pur Sinus 3000W + Porte-fusible Mega-Fuse 300A + Câbles 50 mm² sertis");
+                listeMateriel.push("Coffret protection 230V : Différentiel 30mA Type A + Disjoncteur 16A + Prise 230V DIN");
+            }
+
+            if (panneaux === 'abri_2p') {
+                totalHT += PRIX_VENTE.panneauxAbri2P;
+                listeMateriel.push("2x Panneaux solaires haute performance (400W-450W) + Rallonges solaires 6 mm² MC4");
+            } else if (panneaux === 'van_2p') {
+                totalHT += PRIX_VENTE.panneauxVan2P;
+                listeMateriel.push("2x Panneaux solaires format compact spécial toit utilitaire + Rallonges 6 mm² MC4");
+            }
+
+            if (fixation === 'fix_abri_plat') {
+                totalHT += PRIX_VENTE.fixationAbriPlat;
+                listeMateriel.push("Kit fixation toit abri (Mini-rails alu/pattes Z, étriers, visserie Inox + joints EPDM) + Presse-étoupe étanche");
+            } else if (fixation === 'fix_abri_incline') {
+                totalHT += PRIX_VENTE.fixationAbriIncline;
+                listeMateriel.push("Kit fixation toit incliné sur chevrons (Tirefonds double filetage, rails alu, étriers Inox) + Passe-câble étanche");
+            } else if (fixation === 'fix_van') {
+                totalHT += PRIX_VENTE.fixationVan;
+                listeMateriel.push("Kit pose toit Fourgon : Supports d'angle ABS (2 panneaux) + Colle structurelle Sikaflex + Passe-toit étanche IP68");
+            }
+
+            if (batterie === 'lifepo4_200') {
+                totalHT += PRIX_VENTE.batterieLiFePO4;
+                listeMateriel.push("Batterie Lithium LiFePO4 12V 200Ah+ (BMS haute décharge compatible 3000W)");
+            }
+
+            const ul = document.getElementById('liste-materiel');
+            ul.innerHTML = "";
+            listeMateriel.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = item;
+                ul.appendChild(li);
+            });
+
+            const noteDiv = document.getElementById('note-technique');
+            let notes = [];
+            if (convertisseur === '3000w' && batterie === 'aucune') {
+                notes.push("⚡ <strong>Attention (3000W en 12V) :</strong> Appelle jusqu'à 250A en pleine charge. Prévoyez au minimum une batterie Lithium (LiFePO4) 200Ah (BMS 200A+) ou deux grosses batteries décharge lente en parallèle.");
+            }
+            if (fixation === 'aucune') {
+                notes.push("ℹ️ <strong>Sans kit de fixation :</strong> Idéal pour brancher des panneaux pliables mobiles directement sur les prises MC4 du coffret.");
+            }
+            if (notes.length === 0) {
+                notes.push("✅ <strong>Prêt à brancher :</strong> Ensemble pré-câblé et testé en atelier par GST Énergie. Tarifs mis à jour mensuellement selon le cours du matériel.");
+            }
+            noteDiv.innerHTML = notes.join("<br><br>");
+
+            let totalTTC = totalHT * 1.21;
+            document.getElementById('total-ht').innerText = totalHT.toFixed(2) + ' €';
+            document.getElementById('total-ttc').innerText = 'Soit ' + totalTTC.toFixed(2) + ' € TVAC (TVA 21%)';
+
+            localStorage.setItem('gst_usage', usage);
+            localStorage.setItem('gst_mppt', mppt);
+            localStorage.setItem('gst_convertisseur', convertisseur);
+            localStorage.setItem('gst_panneaux', panneaux);
+            localStorage.setItem('gst_fixation', fixation);
+            localStorage.setItem('gst_batterie', batterie);
+        }
+
+        function chargerConfigurationSauvegardee() {
+            if (localStorage.getItem('gst_usage')) document.getElementById('usage').value = localStorage.getItem('gst_usage');
+            if (localStorage.getItem('gst_mppt')) document.getElementById('mppt').value = localStorage.getItem('gst_mppt');
+            if (localStorage.getItem('gst_convertisseur')) document.getElementById('convertisseur').value = localStorage.getItem('gst_convertisseur');
+            if (localStorage.getItem('gst_panneaux')) document.getElementById('panneaux').value = localStorage.getItem('gst_panneaux');
+            if (localStorage.getItem('gst_fixation')) document.getElementById('fixation').value = localStorage.getItem('gst_fixation');
+            if (localStorage.getItem('gst_batterie')) document.getElementById('batterie').value = localStorage.getItem('gst_batterie');
+            calculerPrix();
+        }
+
+        function validerCommande() {
+            const name = document.getElementById('name').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const totalHT = document.getElementById('total-ht').innerText;
+            const totalTTC = document.getElementById('total-ttc').innerText;
+            const modePaiement = document.getElementById('paiement').value;
+
+            if (!name || !email || !phone) {
+                alert("Veuillez renseigner votre nom, votre adresse email et votre numéro de téléphone à l'étape 3 pour valider la commande.");
+                return;
+            }
+
+            if (modePaiement === 'alma') {
+                window.location.href = "https://pay.getalma.eu/TON_LIEN_MARCHAND_ALMA";
+            } 
+            else if (modePaiement === 'paypal') {
+                window.location.href = "https://www.paypal.com/ncp/payment/TON_LIEN_PAYPAL";
+            } 
+            else {
+                alert(
+                    "Merci " + name + (company ? " (" + company + ")" : "") + " !\n\n" +
+                    "Votre commande d'un montant de " + totalHT + " HTVA (" + totalTTC + ") est enregistrée.\n\n" +
+                    "Instructions pour le virement instantané :\n" +
+                    "- Bénéficiaire : GST Énergie\n" +
+                    "- IBAN : BE00 0000 0000 0000 (À compléter)\n" +
+                    "- Communication : KIT-12V-" + name.toUpperCase()
+                );
+            }
+        }
+
+        window.onload = chargerConfigurationSauvegardee;
+    </script>
+</body>
+</html>
